@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import { auth } from "../services/firebase";
 import { db } from "../services/firebase";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 export default class Chat extends Component {
   constructor(props) {
@@ -53,7 +55,7 @@ export default class Chat extends Component {
         content: this.state.content,
         timestamp: Date.now(),
         uid: this.state.user.uid,
-        email:this.state.user.email
+        email: this.state.user.email
       });
       this.setState({ content: '' });
       chatArea.scrollBy(0, chatArea.scrollHeight);
@@ -62,9 +64,19 @@ export default class Chat extends Component {
     }
   }
 
+  // addEmoji = e => {
+  //   let sym = e.unified.split('-')
+  //   let codesArray = []
+  //   sym.forEach(el => codesArray.push('0x' + el))
+  //   let emoji = String.fromCodePoint(...codesArray)
+  //   this.setState({
+  //     content: this.state.content + emoji
+  //   })
+  // }
+
   formatTime(timestamp) {
     const d = new Date(timestamp);
-    const time = `${d.getDate()}/${(d.getMonth()+1)}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    const time = `${d.getDate()}/${(d.getMonth() + 1)}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
     return time;
   }
 
@@ -90,10 +102,13 @@ export default class Chat extends Component {
           })}
         </div>
         <form onSubmit={this.handleSubmit} className="mx-3">
-          <textarea className="form-control" required name="content" onChange={this.handleChange} value={this.state.content}></textarea>
+          <input type="text" className="form-control" required name="content" onChange={this.handleChange} value={this.state.content} />
           {this.state.error ? <p className="text-danger">{this.state.error}</p> : null}
           <button type="submit" className="btn btn-submit px-5 mt-4">Send</button>
         </form>
+        {/* <span>
+          <Picker onSelect={this.addEmoji} />
+        </span> */}
         <div className="py-5 mx-3">
           Login in as: <strong className="text-info">{this.state.user.email}</strong>
         </div>
