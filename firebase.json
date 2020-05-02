@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"chitchat-66d85",
+    "site":"yourProjectId",
     "public": "build",
     "ignore": [
       "firebase.json",
