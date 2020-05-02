@@ -28,7 +28,7 @@ export default class Chat extends Component {
         snapshot.forEach((snap) => {
           chats.push(snap.val());
         });
-        chats.sort(function (a, b) { return a.timestamp - b.timestamp })
+        // chats.sort(function (a, b) { return a.timestamp - b.timestamp })
         this.setState({ chats });
         chatArea.scrollBy(0, chatArea.scrollHeight);
         this.setState({ loadingChats: false });
